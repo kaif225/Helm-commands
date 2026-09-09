@@ -1,0 +1,25 @@
+Helm Commands:
+
+- helm repo add <repo-name> <repo-url>
+- helm search repo <commands> , example - helm search repo nginx
+- helm search repo wildfly --versions (to see all the versions of a chart)
+
+
+** TO INSTALL a helm chart 
+
+- helm install <Release-Name> <repo_name_in_your_local_machine/chart_name> , example - helm install nginx mybitnami/nginx 
+- helm list 
+- helm uninstall <release-name>
+
+** Helm Upgrade
+
+- helm repo add stacksimplify https://stacksimplify.github.io/helm-charts 
+- helm search repo mychart1
+- helm install myapp1 stacksimplify/mychart1 
+- helm upgrade myapp1 stacksimplify/mychart1 --set "image.tag=2.0.0"
+
+
+** Helm Histroy & status command 
+- helm history <release-name>
+- helm status <release-name>
+- helm status myapp1 --show-resources
