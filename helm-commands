@@ -23,3 +23,25 @@ Helm Commands:
 - helm history <release-name>
 - helm status <release-name>
 - helm status myapp1 --show-resources
+
+** Helm install/Upgrade with version 
+- helm install <release-name> repo-name/chart-name --version ""
+- helm status <release-name> --show-resources
+- helm upgrade <release-name> <repo-name/chart-name> --version ""
+- helm upgrade <release-name> <> # it will go to the latest version of the chart
+
+** Helm Rollback
+- helm history
+- helm rollback <release-name> # to rollback to previous version
+- helm rollback <release-name> <revision-number>
+
+** Helm uninstall and give hsitory
+- helm uninstall <release-name> --keep-history
+- helm list --uninstalled
+- helm history <release-name>
+
+** Helm install with --generate-name flag (it auto generate the release-name)
+- helm install <CHART-Name> --generate-name
+
+** Helm install with --atomic flag (when this flag is used, installation process delete the installation (release) on failure
+- 
