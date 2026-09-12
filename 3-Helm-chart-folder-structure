@@ -7,3 +7,58 @@ NOTE: the command will create a folder with the name of chart name and the folde
 - templates
 - charts
 
+.
+├── charts
+├── Chart.yaml
+├── templates
+│   ├── deployment.yaml
+│   ├── _helpers.tpl
+│   ├── hpa.yaml
+│   ├── httproute.yaml
+│   ├── ingress.yaml
+│   ├── NOTES.txt
+│   ├── serviceaccount.yaml
+│   ├── service.yaml
+│   └── tests
+│       └── test-connection.yaml
+└── values.yaml
+
+1. .helmignore: Contains pattern to ignore when packaging helm charts
+2. Chart.yaml: Contains all important chart information (chart metadata)
+
+apiVersion: v2
+name: kaif-chart
+description: A Helm chart for Kubernetes
+type: application
+version: 0.1.0
+appVersion: "1.16.0"
+** NOTE: appVersion most of the time will be our Docker image tag version
+https://helm.sh/docs/topics/charts
+
+3. values.yaml: The default configuration values for this chart
+4. charts folder: A directory containing any charts upon which this (parent chart) depends
+  example: 
+   - Parent chart: UMS App
+   - Sub Charts (Chart Folder): mysql db chart
+5. Template folder: 
+    - A directory of templates that, when combined with values , will generate valid kubernetes manifest files.
+    - It is where helm finds the YAML manifest for our Services, Deployments and other Kubernetes Objects.
+
+6. templates/_helpers.tpl
+    - Sometimes you want to create some reusable parts in your chart then we can use this file.
+    - In the templates/ directory , any file that begins with an inderscore(_) is not expected to output a 
+      Kubernetes manifest file.
+
+7. templates/NOTES.txt
+ - This is optional file which provides important information about our helm chart
+ - Example: How to access the application deployed using helm chart
+
+8. Test folder
+   - We write tests that validate our chart works as expected when it is installed.
+   - This tests also help the chart consumer understand that this helm chart is suppose to do.
+
+9. README.md
+   - to document about our chart
+
+
+
