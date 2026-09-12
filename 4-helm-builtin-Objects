@@ -1,0 +1,65 @@
+** Helm built-In Objects - Root Objects (.)
+- Objects are passed into a template from template engine
+- Objects can be simple, and have just one value or they can contain other objects or functions
+- It start with root object and in that we have 6 builtin objects
+.Release
+.Value
+.Chart
+.Capabilities
+.Template
+.File
+
+----------
+
+** Helm Root object demo with Notes.txt
+- go to the chart --> open notes.txt using vim and clean it
+- and add a comment, in NOTES.txt we add a comment like
+  {{/* Root or Dot or Period Object */}}
+- and below comment we add the details like
+Root Objects: {{ . }}
+- Now run - helm install mychart . --dry-run
+
+---------
+** Helm release and Chart Objects
+.Release Object
+ - Contains Helm Release information
+ - Example: We can put our K8s deployment name in combination with release name using .Release.Name object
+   by accessing it in deployment.yaml helm template
+ - Now add the below lines in NOTES.txt
+
+ {{/* Release Object */}}
+ Release Name: {{ .Release.Name }}
+ Release Namespace: {{ .Release.Namespace }}
+ Release IsUpgrade: {{ .Release.IsUpgrade }}
+ Release IsInstall: {{ .Release.IsInstall }}
+ Release Revision: {{ .Release.Revision }}
+ Release Service: {{ .Release.Service }}
+
+ ---------------
+ ** Helm Values, Capabilities and Template Objects
+ .Values Object
+ - Values Object contains values from the values.yaml file and if any user-supplied values 
+   (-f or --set) that can be passed to templates.
+
+{{/* Values Object */}}
+Replica Count: {{ .Values.replicaCount }}
+Image Respository: {{ .Values.image.repository }}
+Service Type: {{ .Values.service.type }}
+
+--------------
+.Capabilities Object 
+- This provides information about what capabilities the kubernetes cluster supports
+
+{{/* Capabilities Object */}}
+Kubernetes Cluster Version Major: {{ .Capabilities.KubeVersion.Major }}
+Kubernetes Cluster Version Minor: {{ .Capabilities.KubeVersion.Minor }}
+Helm Version: {{ .Capabilities.HelmVersion }}
+Helm Version Semver: {{ .Capabilities.HelmVersion.Version }}
+
+---------
+.Template 
+ - Container the information of the template that is being executed
+
+ Template Name: {{ .Template.Name }}
+ Template BasePath: {{ .Template.BasePath }}
+ 
