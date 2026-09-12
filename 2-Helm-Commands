@@ -1,0 +1,18 @@
+** Helm commands to get informations
+- helm get values <Release_name>
+- helm get notes <Release_name>
+- helm get hooks <Release-name>
+- helm get all <Release-name>
+
+** Overwrite values in helm (using set and values.yaml file)
+- helm install <Release-name> <chart-names> --set "VALUES"
+- helm install <Release-name> -f values.yaml
+
+** Dry-run 
+- helm install  <Release-name> <chart-names> --dry-run
+- helm upgrade  <Release-name> <chart-names> --dry-run
+- helm uninstall  <Release-name> <chart-names> --dry-run
+- helm template  <Release-name> --dry-run
+
+** --debug (to get a verbose output) 
+
