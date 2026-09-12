@@ -60,6 +60,17 @@ Helm Version Semver: {{ .Capabilities.HelmVersion.Version }}
 .Template 
  - Container the information of the template that is being executed
 
- Template Name: {{ .Template.Name }}
- Template BasePath: {{ .Template.BasePath }}
+Template Name: {{ .Template.Name }}
+Template BasePath: {{ .Template.BasePath }}
+-----------
+.Files
+- This provides access to all non-special files in a chart
+- We cannot use it to access templates
+- We can use it to access other files in the chart.
+{{/* File Object */}}
+File Get: {{ .Files.Get "myconfig.toml" }}
+-------------
+
+
+
  
