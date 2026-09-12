@@ -1,0 +1,9 @@
+** To create a fresh chart 
+- helm create <chart-name>
+NOTE: the command will create a folder with the name of chart name and the folder containers
+- Chart.yaml
+- values.yaml
+- .helmignore
+- templates
+- charts
+
