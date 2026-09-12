@@ -1,1 +1,43 @@
+Template action ({{}})
+- Anything in between Template Action  {{ .Chart.Name }} is called Action Template
+- Anything in between Template Action {{ .Chart.Name }} will be rendered by helm template and replace 
+  necessary values.
+- Anything outside of the template action will be printed as it is.
+- Action template defined inside the {{  }} will help us to retrive data from other sources
+
+Valid Action Template
+- create a basic chart 
+- then in templates folder create a deployment.yaml file and in that add the content
+and in that in name add {{ .Release.Name }}-{{ .Chart.Name }}
+----------------------------
+Helm Quote Function and Pipeline
+Example of Quote:
+app.kubernetes.io/managed-by: {{ quote .Release.Service }}
+
+Example of Pipeline
+app.kubernetes.io/managed-by: {{ .Release.Service | quote | upper }}
+
+--------------
+Default Template function
+- it is use to set a default function
+Example: default "foo" .bar
+- the the above example if .bar is evaluated to be empty it will use foo
+the defination of "empty" depends on type:
+- Numeric: 0
+- String: ""
+- Lists: []
+- Dicts: {}
+- Boolean: fasle
+- And always nil (aka null)
+--------------------------------
+
+Controlling White Spaces:
+{{- .Chart.Name}}: if the hyphen is added before the statement, {{- .Chart.Name}} then the leading
+space is removed.
+{{ .Chart.Name -}}: if the hyphen is added after the statement, {{ .Chart.Name -}} then the trailing
+space will be ignored during the rendering.
+
+
+
+
 
