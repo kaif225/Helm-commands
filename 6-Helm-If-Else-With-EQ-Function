@@ -1,0 +1,11 @@
+- If/Else: Help us to create a conditional block
+- eq function: Returns the boolean equality of the argument (eg Arg1 == Arg2)
+
+spec:
+{{- if eq .Values.myapp.env "prod" }}
+  replicas: 4
+{{- else if eq .Values.myapp.env "qa" }}
+  replicas: 2
+{{- else }}
+replicas: 1
+{{- end }}
