@@ -1,0 +1,57 @@
+with action controls variable scoping.
+with action can allow you to set the current scope (.) to a particular object.
+
+with action Syntax
+{{ with PIPELINE }}
+  # restricted scope
+{{ end }}
+
+Example: add this in values.yaml
+# For testing Flow Control: with 
+podAnnotations: 
+  appName: myapp1
+  appType: webserver
+  appTech: HTML
+
+- and then in deployment.yaml add
+  template:
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}        
+      {{- end }}    
+---------------------------------------
+To Access root objects
+
+Add $ to Root Object
+
+appManagedBy: {{ $.Release.Service }}
+
+-------------------
+* Scope more detailed for "with" action block
+
+How to retrieve a single object from .Values.myapps.data.config ?
+What if there is only need for 1 or 2 values from .Values.myapps.data.config ?
+How to access each key value from .Values.myapps.data.config ?
+
+# values.yaml
+# For testing Flow Control: with - Scope more detailed
+myapps:
+  data: 
+    config: 
+      appName: myapp1
+      appType: webserver
+      appTech: HTML
+      appDb: mysql
+
+# Current Scope: Retrieve single object using scope
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}-{{ .Chart.Name }}
+data: 
+{{- with .Values.myapps.data.config }}
+  application-name: {{ .appName }}
+  application-type: {{ .appType }}
+{{- end}} 
+  
